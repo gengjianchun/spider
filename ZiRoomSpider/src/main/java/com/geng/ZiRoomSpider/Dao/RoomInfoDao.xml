@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.geng.ZiRoomSpider.Dao.RoomInfoDao">
 
-<insert id="add">
+<insert id="add" parameterType="com.geng.ZiRoomSpider.bean.Room" 
+useGeneratedKeys="true" keyProperty="id">
+	<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">  
+            SELECT LAST_INSERT_ID() AS id  
+        </selectKey> 
+
 	INSERT INTO 
 		ROOM
 		(
@@ -22,6 +27,28 @@
 			#{title},
 			#{price}
 		)
+</insert>
+
+<insert id="saveDetail">
+	INSERT INTO DETAIL
+	(
+		ID,
+		AREA,
+		ORIENTATION,
+		ROOMNUM,
+		WOMANNUM,
+		MENNUM
+	)
+
+	VALUES
+	(
+		#{id},
+		#{area},
+		#{orientation},
+		#{roomNum},
+		#{womanNum},
+		#{menNum}
+	)
 </insert>
 
 </mapper>

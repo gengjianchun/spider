@@ -1,10 +1,36 @@
 package com.geng.ZiRoomSpider.bean;
 
 public class Room {
+	private Integer id;
 	private  String title;
 	private String url;
-	private String sunLine;
+	private String subLine;
 	private String distance;
+	private String station;
+	private String price;
+	
+
+	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getStation() {
+		return station;
+	}
+	public void setStation(String station) {
+		this.station = station;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -17,11 +43,11 @@ public class Room {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getSunLine() {
-		return sunLine;
+	public String getSubLine() {
+		return subLine;
 	}
-	public void setSunLine(String sunLine) {
-		this.sunLine = sunLine;
+	public void setSubLine(String subLine) {
+		this.subLine = subLine;
 	}
 	public String getDistance() {
 		return distance;
