@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
 import com.geng.ZiRoomSpider.Dao.RoomInfoDao;
 import com.geng.ZiRoomSpider.bean.DetailInfo;
 import com.geng.ZiRoomSpider.bean.Room;
-public class InfoHandler implements Runnable{
+public class UpdateInfoHandler implements Runnable{
 
 	private  RoomInfoDao roomInfoDao;
 	private BlockingQueue<Room> queue;
 	
-	public InfoHandler(RoomInfoDao roomInfoDao, BlockingQueue<Room> queue){
+	public UpdateInfoHandler(RoomInfoDao roomInfoDao, BlockingQueue<Room> queue){
 		this.roomInfoDao = roomInfoDao;
 		this.queue = queue;
 	}
@@ -69,9 +69,8 @@ public class InfoHandler implements Runnable{
 		
 		detail.setId(roomId);
 		
-		roomInfoDao.saveDetail(detail);
-		System.out.println("insert detail :"+detail);
-		
+		roomInfoDao.updateDetail(detail);
+		System.out.println("update detail:"+detail);
 	}
 
 	private  String getLastNum(String lo) {

@@ -10,4 +10,13 @@ public interface RoomInfoDao {
 
 	void saveDetail(DetailInfo detail);
 
+	Room getByUrl(String url);
+
+
+	void updateRoom(Room room);
+
+	DetailInfo getDetailById(Integer id);
+
+	void updateDetail(DetailInfo detail);
+
 }

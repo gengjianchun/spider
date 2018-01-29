@@ -68,6 +68,12 @@ public class DetailInfo {
 		this.roomNum = roomNum;
 	}
 
+	@Override
+	public String toString() {
+		return "DetailInfo [id=" + id + ", area=" + area + ", orientation=" + orientation + ", roomNum=" + roomNum
+				+ ", womanNum=" + womanNum + ", menNum=" + menNum + "]";
+	}
+
 
 	
 	

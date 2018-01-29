@@ -16,7 +16,8 @@ useGeneratedKeys="true" keyProperty="id">
 		STATION,
 		DISTANCE,
 		TITLE,
-		PRICE
+		PRICE,
+		updateTime
 		)
 		VALUES
 		(
@@ -25,7 +26,8 @@ useGeneratedKeys="true" keyProperty="id">
 			#{station},
 			#{distance},
 			#{title},
-			#{price}
+			#{price},
+			now()
 		)
 </insert>
 
@@ -37,7 +39,8 @@ useGeneratedKeys="true" keyProperty="id">
 		ORIENTATION,
 		ROOMNUM,
 		WOMANNUM,
-		MENNUM
+		MENNUM,
+		updateTime
 	)
 
 	VALUES
@@ -47,8 +50,55 @@ useGeneratedKeys="true" keyProperty="id">
 		#{orientation},
 		#{roomNum},
 		#{womanNum},
-		#{menNum}
+		#{menNum},
+		now()
 	)
 </insert>
 
+<select id="getByUrl" resultType="com.geng.ZiRoomSpider.bean.Room">
+	select
+	r.id as id
+	from
+		room r
+	where weburl=#{url}
+</select>
+
+<update id="updateRoom" parameterType="com.geng.ZiRoomSpider.bean.Room">
+	update
+		 room
+	set
+		weburl = #{url},
+		subline =#{subLine},
+		station = #{station},
+		distance = #{distance},
+		title = #{title},
+		price = #{price},
+		updateTime=now()
+	where
+	 id= #{id} 
+</update>
+
+
+<select id="getDetailById" resultType="com.geng.ZiRoomSpider.bean.DetailInfo">
+	select *
+	from
+	detail
+	where
+	id=#{id}
+</select>
+
+<update id="updateDetail" parameterType="com.geng.ZiRoomSpider.bean.DetailInfo">
+	update detail
+	set
+	area = #{area},
+	orientation = #{orientation},
+	roomNum = #{roomNum},
+	womanNum = #{womanNum},
+	menNum = #{menNum},
+	updateTime = now()
+	where 
+	id = #{id}
+		
+
+</update>
 </mapper>

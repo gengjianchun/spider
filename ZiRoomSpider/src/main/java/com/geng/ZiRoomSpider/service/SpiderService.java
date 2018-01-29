@@ -20,6 +20,7 @@ import com.geng.ZiRoomSpider.Support.GetTargetDocument;
 import com.geng.ZiRoomSpider.Support.HeaderLoader;
 import com.geng.ZiRoomSpider.Support.HtmlParser;
 import com.geng.ZiRoomSpider.Support.InfoHandler;
+import com.geng.ZiRoomSpider.Support.UpdateInfoHandler;
 import com.geng.ZiRoomSpider.bean.Room;
 
 
@@ -35,13 +36,15 @@ public class SpiderService {
 	@Autowired
 	private RoomInfoDao roomInfoDao;
 	
-	private static BlockingQueue<Room> queue = new ArrayBlockingQueue<Room>(50);
+	private static BlockingQueue<Room> insertQueue = new ArrayBlockingQueue<Room>(50);
+	private static BlockingQueue<Room> updateQueue = new ArrayBlockingQueue<Room>(50);
 	
 	public void start() throws Exception {
 			
 			//解析粗略信息
-			new Thread(new HtmlParser(targeturl, roomInfoDao, queue)).start();
-			new Thread(new InfoHandler(roomInfoDao, queue)).start();
+			new Thread(new HtmlParser(targeturl, roomInfoDao, insertQueue,updateQueue)).start();
+			new Thread(new InfoHandler(roomInfoDao, insertQueue)).start();
+			new Thread(new UpdateInfoHandler(roomInfoDao, updateQueue)).start();
 		
 		
 	}

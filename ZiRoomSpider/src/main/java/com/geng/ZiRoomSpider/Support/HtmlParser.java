@@ -18,12 +18,14 @@ public class HtmlParser implements Runnable {
 	private String targeturl;
 
 	private RoomInfoDao roomInfoDao;
-	private BlockingQueue<Room> queue;
+	private BlockingQueue<Room> insertQueue;
+	private BlockingQueue<Room> updateQueue;
 	
-	public HtmlParser(String targeturl, RoomInfoDao roomInfoDao, BlockingQueue<Room> queue){
+	public HtmlParser(String targeturl, RoomInfoDao roomInfoDao, BlockingQueue<Room> insertQueue, BlockingQueue<Room> updateQueue){
 		this.targeturl = targeturl;
 		this.roomInfoDao = roomInfoDao;
-		this.queue = queue;
+		this.insertQueue = insertQueue;
+		this.updateQueue = updateQueue;
 	}
 	
 	
@@ -59,14 +61,30 @@ public class HtmlParser implements Runnable {
 			room.setSubLine(this.getSubLine(detail));
 			room.setStation(this.getStation(detail));
 			room.setPrice(this.getLastNum(price));
-			Integer id = roomInfoDao.add(room);
-			if(id != null){
+			Room oldRoom = roomInfoDao.getByUrl(room.getUrl());
+			if(oldRoom != null && oldRoom.getId() != null){
+				room.setId(oldRoom.getId());
+				roomInfoDao.updateRoom(room);
+				System.out.println("update room:"+room);
 				try {
-					queue.put(room);
+					updateQueue.put(room);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+			}else{
+				Integer id = roomInfoDao.add(room);
+				System.out.println("insert room:"+room);
+				if(id != null){
+					try {
+						insertQueue.put(room);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 			}
+			
+			
+			
 		}
 		
 	}
@@ -134,18 +152,20 @@ public class HtmlParser implements Runnable {
 
 
 	public void run() {
-		while(targeturl != null){
+		String url = targeturl;
+		while(url != null){
 			Document doc;
 			try {
-				doc = GetTargetDocument.get(targeturl);
-				parse(doc);
+				doc = GetTargetDocument.get(url);
 				String nextPage = getNextPage(doc);
-				if(targeturl.equals(nextPage)){
-					break;
+				if(url.equals(nextPage)){
+					url = targeturl;
+					continue;
 				}else{
-					targeturl = nextPage;
+					url = nextPage;
 				}
-				System.out.println("put:"+queue.size());
+				
+				parse(doc);
 				Thread.sleep(20000);
 			} catch (Exception e) {
 				e.printStackTrace();

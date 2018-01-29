@@ -13,6 +13,11 @@ public class Room {
 	
 	
 	
+	@Override
+	public String toString() {
+		return "Room [id=" + id + ", title=" + title + ", url=" + url + ", subLine=" + subLine + ", distance="
+				+ distance + ", station=" + station + ", price=" + price + "]";
+	}
 	public Integer getId() {
 		return id;
 	}
