@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-01-26 15:32:18
+Date: 2018-01-31 18:59:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,6 +26,7 @@ CREATE TABLE `detail` (
   `ROOMNUM` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `WOMANNUM` int(10) DEFAULT NULL,
   `MENNUM` int(10) DEFAULT NULL,
+  `UPDATETIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -41,5 +42,6 @@ CREATE TABLE `room` (
   `DISTANCE` int(11) DEFAULT NULL,
   `TITLE` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `PRICE` int(30) DEFAULT NULL,
+  `UPDATETIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2988 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4260 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
