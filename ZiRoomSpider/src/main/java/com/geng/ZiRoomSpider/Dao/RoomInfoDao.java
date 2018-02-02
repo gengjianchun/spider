@@ -23,4 +23,6 @@ public interface RoomInfoDao {
 
 	int delOldRoom(Date date);
 
+	void delFullRoomDetail();
+
 }

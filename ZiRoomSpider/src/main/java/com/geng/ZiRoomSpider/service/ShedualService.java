@@ -20,6 +20,7 @@ public class ShedualService  {
 		calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR)-3);
 		roomInfoDao.delOldRoom(calendar.getTime());
 		
+		roomInfoDao.delFullRoomDetail();
 		
 	}
 	
