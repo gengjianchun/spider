@@ -106,5 +106,10 @@ useGeneratedKeys="true" keyProperty="id">
 	WHERE
 		UPDATETIME &lt; #{date}
 </delete>
-
+<delete id="delFullRoomDetail">
+	DELETE FROM
+	 DETAIL
+	 WHERE
+	 	ROOMNUM=WOMANNUM+MENNUM
+</delete>
 </mapper>

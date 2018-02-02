@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-02-02 18:30:31
+Date: 2018-02-02 18:36:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `detail` (
   `ID` int(11) NOT NULL,
   `AREA` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ORIENTATION` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ROOMNUM` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ROOMNUM` int(20) DEFAULT NULL,
   `WOMANNUM` int(10) DEFAULT NULL,
   `MENNUM` int(10) DEFAULT NULL,
   `UPDATETIME` datetime DEFAULT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `room` (
   `PRICE` int(30) DEFAULT NULL,
   `UPDATETIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4264 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4265 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 DROP TRIGGER IF EXISTS `del_room_trigger`;
 DELIMITER ;;
 CREATE TRIGGER `del_room_trigger` AFTER DELETE ON `detail` FOR EACH ROW delete from room where id = old.id
