@@ -98,7 +98,13 @@ useGeneratedKeys="true" keyProperty="id">
 	updateTime = now()
 	where 
 	id = #{id}
-		
-
 </update>
+<delete id="delOldRoom">
+	DELETE 
+	FROM
+		room
+	WHERE
+		UPDATETIME &lt; #{date}
+</delete>
+
 </mapper>
