@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.geng.ZiRoomSpider.service.SpiderService;
 
 public class SpiderStart {
-
+//测试代码冲突
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
